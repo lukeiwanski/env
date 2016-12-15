@@ -115,9 +115,7 @@ fi
 # Yavide alias
 alias yavide="gvim --servername yavide -f -N -u /opt/yavide/.vimrc"
 
-function me_() {
-  echo -e '\[\033[38;5;177m\]\u'
-}
+PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
 
 function at_() {
   echo -e '\[\033[38;5;176m\]@'
@@ -184,7 +182,23 @@ function parse_git_dirty {
 	fi
 }
 
-export PS1="$(me_)$(at_)$(host_)$(sep_)$(pwd_)\[\033[33m\] \`parse_git_branch\`\`if [ \$? = 0 ]; then echo -e '\[\033[38;5;239m\][\[\033[38;5;34m\]:)\[\033[38;5;239m\]]'; else echo -e '\[\033[38;5;239m\][\[\e[01;31m\]:(\[\033[38;5;239m\]]'; fi\` \[\e[01;34m\]$\[\e[00m\]"
+__prompt_command() {
+    local EXIT="$?"             # This needs to be first
+    PS1=""
+
+    local RCol='\[\e[0m\]'
+
+    local Red='\[\e[0;31m\]'
+    local BYel='\[\e[1;33m\]'
+
+    if [ $EXIT != 0 ]; then
+        PS1+="${Red}\u${RCol}"      # Add red if exit code non 0
+    else
+        PS1+="\[\033[38;5;177m\]\u${RCol}"
+    fi
+
+    PS1+="${RCol}$(at_)$(host_)$(sep_)$(pwd_)\[\033[33m\]\`parse_git_branch\`${BYel}$ ${RCol}"
+}
 
 # TF exports
 export TF_NEED_SYCL=1
