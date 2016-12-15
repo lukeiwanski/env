@@ -1,0 +1,12 @@
+syntax on                                                                       
+set autoindent                                                                  
+set tabstop=2                                                                   
+colorscheme Tomorrow-Night                                                      
+set number                                                                      
+set title                                                                       
+set nobackup                                                                    
+set noswapfile                                                                  
+set colorcolumn=80                                                              
+set hidden                                                                      
+set history=10000                                                               
+set pastetoggle=<F2> 
