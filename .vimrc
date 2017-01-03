@@ -36,3 +36,11 @@ command! Search call MySearch()
 nnoremap <leader>s : Search<CR>
 nnoremap <leader>* :silent grep <cword> \| copen<CR><C-l>
 nnoremap <leader>q :cclose<CR>
+
+map <C-j> :cn<CR>
+map <C-k> :cp<CR>
+
+map <C-Up> :wincmd k<CR>
+map <C-Down> :wincmd j<CR>
+map <C-Left> :wincmd h<CR>
+map <C-Right> :wincmd l<CR>
